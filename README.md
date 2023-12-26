@@ -1,8 +1,8 @@
-# Gitarasa
+# BK POLIKLINIK
 
 ## Tentang
 
-Aplikasi ini merupakan dashboard Gitarasa
+Aplikasi ini merupakan project capstone BK POLIKLINIK Universitas Dian Nuswantoro
 
 ## Tools
 
@@ -20,8 +20,8 @@ Aplikasi ini dibangun menggunakan
 composer install
 ```
 
-2. Untuk `base_url` defaultnya adalah `http://gitarasa.test`
-3. Untuk `database` defaultnya adalah `gitarasa`
+2. Untuk `base_url` defaultnya adalah `http://bk-poliklinik.test`
+3. Untuk `database` defaultnya adalah `poli_bk`
 4. Ubah untuk settingan lainnya dapat dirubah melalui file `.env` lalu eksekusi perintah
 
 ```bash
