@@ -1,0 +1,42 @@
+.blockMsg {
+    background-color: transparent !important;
+    border: 0 !important;
+    width: 100% !important;
+}
+
+.blockUiSpinner {
+    width: 13px;
+    height: 13px;
+}
+
+.blockUiMessage {
+    margin-left: 1px !important;
+}
+
+.card-image {
+    max-height: 200px;
+}
+
+.datepicker {
+    background-color: white !important;
+}
+
+.dropify-wrapper {
+    border-radius: 5px;
+}
+
+.dropify-message-custom {
+    font-size: 14pt;
+}
+
+.logo {
+    max-width: 80px !important;
+}
+
+.margin-cancel-button {
+    margin-left: 7px;
+}
+
+.notification-container {
+    margin-top: 5px;
+}
