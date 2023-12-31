@@ -21,15 +21,15 @@ class Checkup extends Model
      *
      * @var array
      */
-    protected $with = ['poliList'];
+    protected $with = ['poliRegister'];
 
     /**
-     * Relationship with polilist.
+     * Relationship with poli register.
      *
      * @return relationship
      */
-    public function poliList()
+    public function poliRegister()
     {
-        return $this->belongsTo(PoliList::class, 'poli_list_id', 'id');
+        return $this->belongsTo(PoliRegister::class, 'poli_register_id', 'id');
     }
 }

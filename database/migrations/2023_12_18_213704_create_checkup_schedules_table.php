@@ -22,6 +22,12 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
 
+            $table->foreignId('poli_id')
+                ->nullable()
+                ->constrained('polis')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+
             $table->enum('day', [
                 'Senin',
                 'Selasa',

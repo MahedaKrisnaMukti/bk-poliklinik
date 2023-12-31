@@ -30,10 +30,11 @@ Route::group(
         'prefix' => 'dokter',
     ],
     function () {
-        Route::get('jadwal-periksa/datatable', [CheckupScheduleController::class, 'datatable'])
-            ->name('datatable');
+        Route::get('jadwal-periksa', [CheckupScheduleController::class, 'index'])
+            ->name('index');
 
-        Route::resource('jadwal-periksa', CheckupScheduleController::class);
+        Route::put('jadwal-periksa/{id}', [CheckupScheduleController::class, 'update'])
+            ->name('update');
     }
 );
 

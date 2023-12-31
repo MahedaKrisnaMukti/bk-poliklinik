@@ -21,7 +21,7 @@ class CheckupSchedule extends Model
      *
      * @var array
      */
-    protected $with = ['doctor'];
+    protected $with = ['doctor', 'poli'];
 
     /**
      * Relationship with doctor.
@@ -31,5 +31,15 @@ class CheckupSchedule extends Model
     public function doctor()
     {
         return $this->belongsTo(Doctor::class, 'doctor_id', 'id');
+    }
+
+    /**
+     * Relationship with poli.
+     *
+     * @return relationship
+     */
+    public function poli()
+    {
+        return $this->belongsTo(Poli::class, 'poli_id', 'id');
     }
 }

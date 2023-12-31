@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Crypt;
 use Yajra\DataTables\Facades\DataTables;
 
 use App\Helpers\FormatterCustom;
+
 use App\Models\Medicine;
 
 class MedicineService

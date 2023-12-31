@@ -13,7 +13,7 @@ use App\Services\Dashboard\Admin\PatientService;
 class PatientController extends Controller
 {
     /**
-     * Service instance.
+     * Validation instance.
      *
      * @var \App\Validations\Dashboard\Admin\PatientValidation
      */

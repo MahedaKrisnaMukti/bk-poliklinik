@@ -8,11 +8,33 @@
 
 <script>
     function loadDatepicker() {
-        if ($('.datepicker').length) {
-            $(".datepicker").flatpickr({
+        if ($('.custom-datepicker').length) {
+            $(".custom-datepicker").flatpickr({
+                locale: "id",
                 altInput: true,
+                dateFormat: "Y-m-d",
                 altFormat: "j F Y",
-                dateFormat: "Y-m-d"
+            });
+        }
+
+        if ($('.custom-datetimepicker').length) {
+            $(".custom-datetimepicker").flatpickr({
+                locale: "id",
+                altInput: true,
+                dateFormat: "Y-m-d H:i",
+                altFormat: "j F Y H:i",
+            });
+        }
+
+        if ($('.custom-timepicker').length) {
+            $(".custom-timepicker").flatpickr({
+                locale: "id",
+                enableTime: true,
+                noCalendar: true,
+                altInput: true,
+                dateFormat: "H:i",
+                altFormat: "H:i",
+                time_24hr: true,
             });
         }
     }

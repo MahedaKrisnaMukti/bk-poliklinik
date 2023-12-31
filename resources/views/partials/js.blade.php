@@ -8,6 +8,9 @@
 {{-- Jquery Repeater --}}
 <script src="/assets/custom-packages/form-repeater/jquery.repeater.js"></script>
 
+{{-- Axios --}}
+<script src="/assets/custom-packages/axios/axios.min.js"></script>
+
 {{-- Block UI --}}
 <script src="/app-assets/js/scripts/extensions/ext-component-blockui.js"></script>
 
@@ -16,6 +19,7 @@
 
 {{-- Flatpickr --}}
 <script src="/assets/custom-packages/flatpickr/dist/flatpickr.min.js"></script>
+<script src="/assets/custom-packages/flatpickr/dist/l10n/id.js"></script>
 
 {{-- Dropify --}}
 <script src="/assets/custom-packages/dropify/dist/js/dropify.min.js"></script>

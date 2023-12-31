@@ -23,6 +23,25 @@ class FormatterCustom
     }
 
     /**
+     * Change day helper.
+     *
+     * @param  $date
+     * @return String
+     */
+    public static function changeDayIndo($day)
+    {
+        $day = str_replace('Monday', 'Senin', $day);
+        $day = str_replace('Tuesday', 'Selasa', $day);
+        $day = str_replace('Wednesday', 'Rabu', $day);
+        $day = str_replace('Thursday', 'Kamis', $day);
+        $day = str_replace('Friday', 'Jumat', $day);
+        $day = str_replace('Saturday', 'Sabtu', $day);
+        $day = str_replace('Sunday', 'Minggu', $day);
+
+        return $day;
+    }
+
+    /**
      * Change month helper.
      *
      * @param  $date

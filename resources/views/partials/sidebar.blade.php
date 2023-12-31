@@ -81,12 +81,12 @@
 
             {{-- * Menu Pasien --}}
             @if (auth()->user()->role == 'Pasien')
-                <li class="nav-item {{ request()->is('pasien/daftar-poli*') ? 'active' : '' }}">
-                    <a class="d-flex align-items-center" href="/pasien/daftar-poli">
+                <li class="nav-item {{ request()->is('pasien/mendaftar-poli*') ? 'active' : '' }}">
+                    <a class="d-flex align-items-center" href="/pasien/mendaftar-poli">
                         <i data-feather="list"></i>
 
                         <span class="menu-title text-truncate">
-                            Daftar Poli
+                            Mendaftar Poli
                         </span>
                     </a>
                 </li>

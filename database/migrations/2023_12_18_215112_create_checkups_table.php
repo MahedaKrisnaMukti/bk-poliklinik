@@ -16,20 +16,17 @@ return new class extends Migration
         Schema::create('checkups', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('polilist_id')
+            $table->foreignId('poli_register_id')
                 ->nullable()
-                ->constrained('poli_lists')
+                ->constrained('poli_registers')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
 
-            $table->dateTime('checkup_datetime')
-                ->comment('Tanggal periksa');
+            $table->bigInteger('checkup_fee')
+                ->comment('Biaya periksa');
 
             $table->text('note')
                 ->comment('Catatan');
-
-            $table->bigInteger('checkup_fee')
-                ->comment('Biaya periksa');
 
             $table->timestamps();
         });
