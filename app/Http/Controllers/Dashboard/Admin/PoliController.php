@@ -35,7 +35,7 @@ class PoliController extends Controller
     public function index()
     {
         return view('dashboard.admin.poli.index', [
-            'title' => 'Gitarasa',
+            'title' => 'BK Poliklinik',
             'description' => '',
             'keywords' => '',
         ]);
@@ -49,7 +49,7 @@ class PoliController extends Controller
     public function create()
     {
         return view('dashboard.admin.poli.create', [
-            'title' => 'Gitarasa',
+            'title' => 'BK Poliklinik',
             'description' => '',
             'keywords' => '',
         ]);
@@ -79,7 +79,7 @@ class PoliController extends Controller
         $result = $this->poliService->show($id);
 
         return view('dashboard.admin.poli.show', [
-            'title' => 'Gitarasa',
+            'title' => 'BK Poliklinik',
             'description' => '',
             'keywords' => '',
             'poli' => $result->poli,
@@ -97,7 +97,7 @@ class PoliController extends Controller
         $result = $this->poliService->edit($id);
 
         return view('dashboard.admin.poli.edit', [
-            'title' => 'Gitarasa',
+            'title' => 'BK Poliklinik',
             'description' => '',
             'keywords' => '',
             'poli' => $result->poli,

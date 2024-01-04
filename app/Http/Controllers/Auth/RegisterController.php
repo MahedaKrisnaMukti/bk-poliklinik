@@ -66,6 +66,6 @@ class RegisterController extends Controller
 
         $result = $this->registerService->registration($request);
 
-        return redirect()->intended('/')->with($result->statusAlert, $result->message);
+        return redirect()->intended('/login')->with($result->statusAlert, $result->message);
     }
 }

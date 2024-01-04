@@ -95,8 +95,8 @@ class PatientValidation
         }
 
         // * Cek ktp ada atau tidak
-        $user = User::where('identity_card_number', $request->identityCardNumber)
-            ->where('id', '!=', $patient->user_id)
+        $patient = Patient::where('identity_card_number', $request->identityCardNumber)
+            ->where('id', '!=', $patient->id)
             ->first();
 
         if (!empty($patient)) {

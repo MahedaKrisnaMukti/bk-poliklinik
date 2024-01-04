@@ -2,12 +2,14 @@
 
 namespace Database\Seeders;
 
-use App\Models\CheckupSchedule;
 use Illuminate\Database\Seeder;
 
 use Illuminate\Support\Facades\Hash;
 use Faker\Factory;
 
+use App\Helpers\FormatterCustom;
+
+use App\Models\CheckupSchedule;
 use App\Models\Doctor;
 use App\Models\Poli;
 use App\Models\User;
@@ -45,12 +47,15 @@ class DoctorSeeder extends Seeder
             'phone_number' => $phoneNumber,
         ]);
 
+        $day = date('l');
+        $day = FormatterCustom::changeDayIndo($day);
+
         CheckupSchedule::create([
             'doctor_id' => $doctor->id,
             'poli_id' => $doctor->poli_id,
-            'day' => 'Jumat',
-            'start_time' => '08:00:00',
-            'end_time' => '22:59:00',
+            'day' => $day,
+            'start_time' => '01:00:00',
+            'end_time' => '23:59:00',
         ]);
 
         // * Dokter 2
@@ -65,7 +70,7 @@ class DoctorSeeder extends Seeder
         $phoneNumber = str_replace('+', '', $phoneNumber);
         $phoneNumber = '8' . $phoneNumber;
 
-        $poli = Poli::first();
+        $poli = Poli::orderBy('id', 'desc')->first();
 
         $doctor = Doctor::create([
             'user_id' => $user->id,

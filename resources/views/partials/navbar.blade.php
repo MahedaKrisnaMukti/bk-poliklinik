@@ -29,7 +29,7 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
-                    <a href="javascript:void(0)" class="dropdown-item">
+                    <a href="/menu-utama/profil" class="dropdown-item">
                         <i class="me-50" data-feather="user"></i>
                         Ubah Profil
                     </a>

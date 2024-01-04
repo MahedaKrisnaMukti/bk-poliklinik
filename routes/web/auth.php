@@ -25,7 +25,7 @@ use App\Http\Controllers\Auth\RegisterController;
 Route::group(
     [],
     function () {
-        Route::get('/', [LoginController::class, 'index'])
+        Route::get('/login', [LoginController::class, 'index'])
             ->middleware(['guest'])
             ->name('login');
 

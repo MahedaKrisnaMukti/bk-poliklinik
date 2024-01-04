@@ -31,7 +31,10 @@ Route::group(
         Route::get('', [MainMenuController::class, 'index'])
             ->name('index');
 
-        Route::get('datatable', [MainMenuController::class, 'datatable'])
-            ->name('datatable');
+        Route::get('profil', [MainMenuController::class, 'profile'])
+            ->name('profile');
+
+        Route::put('ubah-profil', [MainMenuController::class, 'updateProfile'])
+            ->name('updateProfile');
     }
 );

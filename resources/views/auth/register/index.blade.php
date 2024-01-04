@@ -89,7 +89,7 @@
                 Sudah punya akun ?
             </span>
 
-            <a href="/">
+            <a href="/login">
                 <span>
                     Login
                 </span>

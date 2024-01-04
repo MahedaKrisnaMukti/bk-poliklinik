@@ -95,7 +95,7 @@ class PatientController extends Controller
         $result = $this->patientService->show($id);
 
         return view('dashboard.admin.patient.show', [
-            'title' => 'Gitarasa',
+            'title' => 'BK Poliklinik',
             'description' => '',
             'keywords' => '',
             'patient' => $result->patient,
@@ -113,7 +113,7 @@ class PatientController extends Controller
         $result = $this->patientService->edit($id);
 
         return view('dashboard.admin.patient.edit', [
-            'title' => 'Gitarasa',
+            'title' => 'BK Poliklinik',
             'description' => '',
             'keywords' => '',
             'patient' => $result->patient,

@@ -80,6 +80,6 @@ class LoginController extends Controller
     {
         $this->loginService->logout($request);
 
-        return redirect('/');
+        return redirect('/login');
     }
 }

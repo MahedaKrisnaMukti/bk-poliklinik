@@ -6,8 +6,27 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 
+use App\Services\Dashboard\Doctor\PatientHistoryService;
+
 class PatientHistoryController extends Controller
 {
+    /**
+     * Service instance.
+     *
+     * @var \App\Services\Dashboard\Doctor\PatientHistoryService
+     */
+    protected $patientHistoryService;
+
+    /**
+     * Create a new service instance.
+     *
+     * @return void
+     */
+    public function __construct(PatientHistoryService $patientHistoryService)
+    {
+        $this->patientHistoryService = $patientHistoryService;
+    }
+
     /**
      * Index.
      *
@@ -20,5 +39,43 @@ class PatientHistoryController extends Controller
             'description' => '',
             'keywords' => '',
         ]);
+    }
+
+    /**
+     * Show.
+     *
+     * @param  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $result = $this->patientHistoryService->show($id);
+
+        return view('dashboard.doctor.patient-history.show', [
+            'title' => 'BK Poliklinik',
+            'description' => '',
+            'keywords' => '',
+            'poliRegister' => $result->poliRegister,
+            'checkup' => $result->checkup,
+            'checkupDetail' => $result->checkupDetail,
+        ]);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Ajax
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Datatable.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function datatable()
+    {
+        $result = $this->patientHistoryService->datatable();
+
+        return $result->poliRegister;
     }
 }

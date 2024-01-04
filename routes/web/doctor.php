@@ -51,10 +51,17 @@ Route::group(
         'prefix' => 'dokter',
     ],
     function () {
+        Route::get('daftar-pasien', [PatientListController::class, 'index'])
+            ->name('index');
+
         Route::get('daftar-pasien/datatable', [PatientListController::class, 'datatable'])
             ->name('datatable');
 
-        Route::resource('daftar-pasien', PatientListController::class);
+        Route::get('daftar-pasien/{id}/edit', [PatientListController::class, 'edit'])
+            ->name('edit');
+
+        Route::put('daftar-pasien/{id}', [PatientListController::class, 'update'])
+            ->name('update');
     }
 );
 
@@ -71,9 +78,13 @@ Route::group(
         'prefix' => 'dokter',
     ],
     function () {
+        Route::get('riwayat-pasien', [PatientHistoryController::class, 'index'])
+            ->name('index');
+
         Route::get('riwayat-pasien/datatable', [PatientHistoryController::class, 'datatable'])
             ->name('datatable');
 
-        Route::resource('riwayat-pasien', PatientHistoryController::class);
+        Route::get('riwayat-pasien/{id}', [PatientHistoryController::class, 'show'])
+            ->name('show');
     }
 );

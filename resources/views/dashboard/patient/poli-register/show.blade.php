@@ -11,7 +11,7 @@
 
             <div class="card-body">
                 <div class="mb-1">
-                    <a href="/admin/poli">
+                    <a href="/pasien/mendaftar-poli">
                         <button class="btn btn-gradient-secondary">
                             <i class="bi bi-arrow-left"></i>
                             Kembali

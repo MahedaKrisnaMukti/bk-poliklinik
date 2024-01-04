@@ -2,12 +2,13 @@
 
 namespace App\Services\Dashboard\Patient;
 
-use App\Helpers\FormatterCustom;
-use App\Models\CheckupSchedule;
-use App\Models\Patient;
 use Illuminate\Support\Facades\Crypt;
 use Yajra\DataTables\Facades\DataTables;
 
+use App\Helpers\FormatterCustom;
+
+use App\Models\CheckupSchedule;
+use App\Models\Patient;
 use App\Models\Poli;
 use App\Models\PoliRegister;
 
@@ -109,7 +110,8 @@ class PoliRegisterService
 
         $patient = Patient::firstWhere('user_id', $userId);
 
-        $poliRegister = PoliRegister::orderBy('created_at', 'asc')->get();
+        $poliRegister = PoliRegister::where("patient_id", $patient->id)
+        ->orderBy('created_at', 'asc')->get();
 
         $poliRegister = DataTables::of($poliRegister)
             ->addColumn('poliRegisterDateCustom', function ($row) {

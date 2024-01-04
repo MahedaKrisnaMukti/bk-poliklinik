@@ -34,7 +34,7 @@ return new class extends Migration
                 'Rabu',
                 'Kamis',
                 'Jumat',
-                'Sabtu'
+                'Sabtu',
             ])
                 ->comment('Hari');
 

@@ -58,16 +58,16 @@
                     </div>
 
                     <div class="mb-1">
-                        <label class="form-label" for="identity_card_number">
+                        <label class="form-label" for="identityCardNumber">
                             Nomer KTP
                         </label>
 
-                        <input type="text" class="form-control" name="identity_card_number" id="identity_card_number" onkeypress="return inputNumber()"
-                            placeholder="Masukan Nama Pasien" autocomplete="off">
+                        <input type="text" class="form-control" name="identityCardNumber" id="identityCardNumber"
+                            onkeypress="return inputNumber()" placeholder="Masukan Nama Pasien" autocomplete="off">
                     </div>
 
                     <div class="mb-1">
-                        <label class="form-label" for="phone_number">
+                        <label class="form-label" for="phoneNumber">
                             Nomor HP
                         </label>
 
@@ -76,8 +76,8 @@
                                 62
                             </span>
 
-                            <input type="text" class="form-control" name="phone_number" id="phone_number" onkeypress="return inputNumber()""
-                                placeholder="Masukan Nomor HP" autocomplete="off">
+                            <input type="text" class="form-control" name="phoneNumber" id="phoneNumber"
+                                onkeypress="return inputNumber()"" placeholder="Masukan Nomor HP" autocomplete="off">
                         </div>
                     </div>
 
@@ -108,9 +108,9 @@
         function validate() {
             const name = $('#name');
             const address = $('#address');
-            const identity_card_number = $('#identity_card_number');
-            const phone_number = $('#phone_number');
-            const medical_record_number = $('#medical_record_number');
+            const identityCardNumber = $('#identityCardNumber');
+            const phoneNumber = $('#phoneNumber');
+            const medicalRecordNumber = $('#medicalRecordNumber');
 
             if (name.val() == '') {
                 Swal.fire({
@@ -138,7 +138,7 @@
                 return false;
             }
 
-            if (identity_card_number.val() == '') {
+            if (identityCardNumber.val() == '') {
                 Swal.fire({
                     icon: "error",
                     text: "Nomer KTP tidak boleh kosong !",
@@ -151,7 +151,7 @@
                 return false;
             }
 
-            if (phone_number.val() == '') {
+            if (phoneNumber.val() == '') {
                 Swal.fire({
                     icon: "error",
                     text: "No.HP tidak boleh kosong !",
@@ -164,7 +164,7 @@
                 return false;
             }
 
-            if (medical_record_number.val() == '') {
+            if (medicalRecordNumber.val() == '') {
                 Swal.fire({
                     icon: "error",
                     text: "No.RM tidak boleh kosong !",

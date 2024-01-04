@@ -2,11 +2,10 @@
 
 namespace App\Validations\Dashboard\Doctor;
 
-use App\Models\CheckupSchedule;
 use Illuminate\Support\Facades\Crypt;
 
+use App\Models\CheckupSchedule;
 use App\Models\Doctor;
-use App\Models\User;
 
 class CheckupScheduleValidation
 {

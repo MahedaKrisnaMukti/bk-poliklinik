@@ -2,9 +2,10 @@
 
 namespace App\Services\Dashboard\Doctor;
 
+use Illuminate\Support\Facades\Crypt;
+
 use App\Models\CheckupSchedule;
 use App\Models\Doctor;
-use Illuminate\Support\Facades\Crypt;
 
 class CheckupScheduleService
 {

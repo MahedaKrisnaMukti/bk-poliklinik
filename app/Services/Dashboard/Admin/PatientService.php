@@ -26,14 +26,14 @@ class PatientService
 
         $user = User::create($data);
 
-        $user->assignRole('Dokter');
+        $user->assignRole('Pasien');
 
         $data = [
             'user_id' => $user->id,
             'name' => $request->name,
             'address' => $request->address,
-            'identity_card_number' => $request->identity_card_number,
-            'phone_number' => $request->phone_number,
+            'identity_card_number' => $request->identityCardNumber,
+            'phone_number' => $request->phoneNumber,
         ];
 
         Patient::create($data);
@@ -125,8 +125,8 @@ class PatientService
         $data = [
             'name' => $request->name,
             'address' => $request->address,
-            'identity_card_number' => $request->identity_card_number,
-            'phone_number' => $request->phone_number,
+            'identity_card_number' => $request->identityCardNumber,
+            'phone_number' => $request->phoneNumber,
         ];
 
         Patient::where('id', $id)->update($data);

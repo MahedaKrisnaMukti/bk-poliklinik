@@ -58,7 +58,7 @@
                         </span>
 
                         <input type="text" class="form-control" name="phone_number" id="phone_number"
-                            value="{{ $patient->phone_number }}placeholder="Masukan Nomor HP" autocomplete="off" readonly>
+                            value="{{ $patient->phone_number }}" placeholder="Masukan Nomor HP" autocomplete="off" readonly>
                     </div>
                 </div>
 
