@@ -57,20 +57,36 @@ class PatientListService
 
         PoliRegister::where('id', $id)->update($data);
 
-        $data = [
-            'poli_register_id' => $id,
-            'checkup_fee' => 150000,
-            'note' => $request->note,
-        ];
+        $checkup = Checkup::firstWhere("poli_register_id", $id);
 
-        $checkup = Checkup::create($data);
+        if ($checkup) {
+            $data = [
+                'note' => $request->note,
+            ];
 
-        $data = [
-            'checkup_id' => $checkup->id,
-            'medicine_id' => $request->medicineId,
-        ];
+            Checkup::where('id', $checkup->id)->update($data);
 
-        CheckupDetail::create($data);
+            $data = [
+                'medicine_id' => $request->medicineId,
+            ];
+
+            CheckupDetail::where('checkup_id', $checkup->id)->update($data);
+        } else {
+            $data = [
+                'poli_register_id' => $id,
+                'checkup_fee' => 150000,
+                'note' => $request->note,
+            ];
+
+            $checkup = Checkup::create($data);
+
+            $data = [
+                'checkup_id' => $checkup->id,
+                'medicine_id' => $request->medicineId,
+            ];
+
+            CheckupDetail::create($data);
+        }
 
         $status = true;
         $statusAlert = 'success';

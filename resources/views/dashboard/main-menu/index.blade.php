@@ -11,15 +11,9 @@
                         </h2>
                         <br>
                         <p class="d-flex justify-content-center">
-                            Selamat datang di Portal BK Poliklinik, tempat di mana teknologi bertemu dengan perawatan
-                            kesehatan yang terdepan.
+                            Selamat datang di dashboard Poliklinik kami, tempat di mana Anda dapat mengakses berbagai layanan kesehatan dengan mudah dan efisien.
                         </p>
-                        <p class="d-flex justify-content-center">Kami berkomitmen untuk menyediakan Anda akses yang mudah dan
-                            menyeluruh terhadap layanan
-                            kesehatan yang Anda butuhkan. Di sini, Anda dapat menjelajahi beragam fasilitas, mengatur janji,
-                            mengakses riwayat medis, dan menemukan informasi yang relevan untuk perawatan kesehatan Anda.
-                            Terima kasih telah mempercayai kami untuk menjadi mitra perjalanan kesehatan Anda. Mari
-                            bersama-sama meraih kesejahteraan dan kualitas hidup yang lebih baik</p>
+                        <p class="d-flex justify-content-center">Di sini, Anda akan menemukan menu utama yang dirancang untuk memudahkan navigasi dan penggunaan. Mulai dari pendaftaran pasien, jadwal dokter, riwayat medis, hingga informasi tentang layanan kesehatan yang tersedia, semuanya dapat diakses dengan cepat melalui menu yang intuitif. Kami berkomitmen untuk menyediakan pengalaman yang nyaman dan transparan bagi setiap pasien, dan dashboard Poliklinik kami dirancang untuk memenuhi kebutuhan Anda. Jelajahi menu ini dengan nyaman, temukan informasi yang Anda perlukan, dan nikmati kemudahan dalam mengelola kesehatan Anda di Poliklinik kami.</p>
                     </div>
                 </div>
             </div>
