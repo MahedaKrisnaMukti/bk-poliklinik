@@ -1,34 +1,31 @@
-<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+<div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true"
+    data-img="/assets-chameleon/app-assets/images/backgrounds/02.jpg">
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
-            <li class="nav-item me-auto">
-                <a class="navbar-brand" href="/">
-                    <img src="/assets/images-custom/logo.png" style="max-height: 36px;">
+            <li class="nav-item mr-auto"><a class="navbar-brand" href="/">
+                    <img class="brand-logo" alt="" src="/assets/images-custom/logo.png" />
 
-                    <span class="ms-1 text-dark fs-3">
+                    <h3 class="brand-text">
                         BK Poliklinik
-                    </span>
+                    </h3>
                 </a>
             </li>
 
-            <li class="nav-item nav-toggle">
-                <a class="nav-link modern-nav-toggle pe-0" data-bs-toggle="collapse">
-                    <i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i>
-
-                    <i class="d-none d-xl-block collapse-toggle-icon font-medium-4 text-primary" data-feather="disc"
-                        data-ticon="disc"></i>
+            <li class="nav-item d-md-none">
+                <a class="nav-link close-navbar">
+                    <i class="ft-x"></i>
                 </a>
             </li>
         </ul>
     </div>
 
-    <div class="shadow-bottom"></div>
+    <div class="navigation-background"></div>
 
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class="nav-item {{ request()->is('menu-utama*') ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href="/menu-utama">
-                    <i data-feather="home"></i>
+                    <i class="ft-home"></i>
 
                     <span class="menu-title text-truncate">
                         Menu Utama
@@ -40,7 +37,7 @@
             @if (auth()->user()->role == 'Admin')
                 <li class="nav-item {{ request()->is('admin/dokter*') ? 'active' : '' }}">
                     <a class="d-flex align-items-center" href="/admin/dokter">
-                        <i data-feather="database"></i>
+                        <i class="ft-list"></i>
 
                         <span class="menu-title text-truncate">
                             Dokter
@@ -50,7 +47,7 @@
 
                 <li class="nav-item {{ request()->is('admin/pasien*') ? 'active' : '' }}">
                     <a class="d-flex align-items-center" href="/admin/pasien">
-                        <i data-feather="database"></i>
+                        <i class="ft-list"></i>
 
                         <span class="menu-title text-truncate">
                             Pasien
@@ -60,7 +57,7 @@
 
                 <li class="nav-item {{ request()->is('admin/poli*') ? 'active' : '' }}">
                     <a class="d-flex align-items-center" href="/admin/poli">
-                        <i data-feather="database"></i>
+                        <i class="ft-list"></i>
 
                         <span class="menu-title text-truncate">
                             Poli
@@ -70,7 +67,7 @@
 
                 <li class="nav-item {{ request()->is('admin/obat*') ? 'active' : '' }}">
                     <a class="d-flex align-items-center" href="/admin/obat">
-                        <i data-feather="database"></i>
+                        <i class="ft-list"></i>
 
                         <span class="menu-title text-truncate">
                             Obat
@@ -83,7 +80,7 @@
             @if (auth()->user()->role == 'Pasien')
                 <li class="nav-item {{ request()->is('pasien/mendaftar-poli*') ? 'active' : '' }}">
                     <a class="d-flex align-items-center" href="/pasien/mendaftar-poli">
-                        <i data-feather="list"></i>
+                        <i class="ft-list"></i>
 
                         <span class="menu-title text-truncate">
                             Mendaftar Poli
@@ -96,7 +93,7 @@
             @if (auth()->user()->role == 'Dokter')
                 <li class="nav-item {{ request()->is('dokter/jadwal-periksa*') ? 'active' : '' }}">
                     <a class="d-flex align-items-center" href="/dokter/jadwal-periksa">
-                        <i data-feather="calendar"></i>
+                        <i class="ft-calendar"></i>
 
                         <span class="menu-title text-truncate">
                             Jadwal Periksa
@@ -106,7 +103,7 @@
 
                 <li class="nav-item {{ request()->is('dokter/daftar-pasien*') ? 'active' : '' }}">
                     <a class="d-flex align-items-center" href="/dokter/daftar-pasien">
-                        <i data-feather="users"></i>
+                        <i class="ft-users"></i>
 
                         <span class="menu-title text-truncate">
                             Daftar Pasien
@@ -116,7 +113,7 @@
 
                 <li class="nav-item {{ request()->is('dokter/riwayat-pasien*') ? 'active' : '' }}">
                     <a class="d-flex align-items-center" href="/dokter/riwayat-pasien">
-                        <i data-feather="user-check"></i>
+                        <i class="ft-user-check"></i>
 
                         <span class="menu-title text-truncate">
                             Riwayat Pasien

@@ -12,7 +12,7 @@
             <div class="card-body">
                 <div class="mb-1">
                     <a href="/admin/dokter">
-                        <button class="btn btn-gradient-secondary">
+                        <button class="btn btn-secondary">
                             <i class="bi bi-arrow-left"></i>
                             Kembali
                         </button>
@@ -92,7 +92,7 @@
 
                     <hr>
 
-                    <button type="submit" class="btn btn-gradient-primary w-100" id="btnSubmit">
+                    <button type="submit" class="btn btn-primary w-100" id="btnSubmit">
                         <i class="bi bi-check2-circle"></i>
                         Simpan
                     </button>

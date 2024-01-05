@@ -15,4 +15,28 @@ class Medicine extends Model
      * @var array
      */
     protected $guarded = ['id'];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['image_url'];
+
+    /**
+     * Get the image url.
+     *
+     * @return string
+     */
+    public function getImageUrlAttribute()
+    {
+        $fileUrl = null;
+
+        if ($this->image) {
+            $url = config('s3.url');
+            $fileUrl = $url . 'medicine/' . $this->image;
+        }
+
+        return $fileUrl;
+    }
 }

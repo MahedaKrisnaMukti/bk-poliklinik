@@ -162,7 +162,7 @@ class PoliService
                 $show =
                     <<<EOF
                     <a href="/admin/poli/$id">
-                        <button class="btn btn-gradient-info">
+                        <button class="btn btn-info">
                             <i class="bi bi-search"></i>
                         </button>
                     </a>
@@ -171,7 +171,7 @@ class PoliService
                 $edit =
                     <<<EOF
                     <a href="/admin/poli/$id/edit">
-                        <button class="btn btn-gradient-success">
+                        <button class="btn btn-success">
                             <i class="bi bi-pencil-square"></i>
                         </button>
                     </a>
@@ -179,7 +179,7 @@ class PoliService
 
                 $delete =
                     <<<EOF
-                    <button type="button" class="btn btn-gradient-danger" onclick="confirmDelete('$id')">
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete('$id')">
                         <i class="bi bi-trash"></i>
                     </button>
                     EOF;

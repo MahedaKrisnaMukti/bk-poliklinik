@@ -20,5 +20,17 @@ class MedicineSeeder extends Seeder
             'packaging' => 'Tablet',
             'price' => 20000,
         ]);
+
+        Medicine::create([
+            'name' => 'Konidin',
+            'packaging' => 'Tablet',
+            'price' => 10000,
+        ]);
+
+        Medicine::create([
+            'name' => 'Bodrex',
+            'packaging' => 'Tablet',
+            'price' => 10000,
+        ]);
     }
 }

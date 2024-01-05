@@ -164,13 +164,18 @@ class MedicineService
         $medicine = Medicine::orderBy('name', 'asc')->get();
 
         $medicine = DataTables::of($medicine)
+            ->addColumn('priceCustom', function ($row) {
+                $menu = FormatterCustom::formatNumber($row->price, true);
+
+                return $menu;
+            })
             ->addColumn('action', function ($row) {
                 $id = Crypt::encrypt($row->id);
 
                 $show =
                     <<<EOF
                     <a href="/admin/obat/$id">
-                        <button class="btn btn-gradient-info">
+                        <button class="btn btn-info">
                             <i class="bi bi-search"></i>
                         </button>
                     </a>
@@ -179,7 +184,7 @@ class MedicineService
                 $edit =
                     <<<EOF
                     <a href="/admin/obat/$id/edit">
-                        <button class="btn btn-gradient-success">
+                        <button class="btn btn-success">
                             <i class="bi bi-pencil-square"></i>
                         </button>
                     </a>
@@ -187,7 +192,7 @@ class MedicineService
 
                 $delete =
                     <<<EOF
-                    <button type="button" class="btn btn-gradient-danger" onclick="confirmDelete('$id')">
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete('$id')">
                         <i class="bi bi-trash"></i>
                     </button>
                     EOF;

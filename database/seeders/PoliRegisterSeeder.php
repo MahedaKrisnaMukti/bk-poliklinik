@@ -37,5 +37,14 @@ class PoliRegisterSeeder extends Seeder
             'poli_register_date' => $today,
             'complaint' => 'Pusing mikirin skripsi',
         ]);
+
+        $patient = Patient::orderBy('id', 'desc')->first();
+
+        PoliRegister::create([
+            'patient_id' => $patient->id,
+            'checkup_schedule_id' => $checkupSchedule->id,
+            'poli_register_date' => $today,
+            'complaint' => 'Pusing mikirin pacar',
+        ]);
     }
 }

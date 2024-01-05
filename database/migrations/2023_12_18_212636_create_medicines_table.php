@@ -25,6 +25,9 @@ return new class extends Migration
             $table->bigInteger('price')
                 ->comment('Harga');
 
+            $table->string('image')
+                ->default('default.png');
+
             $table->timestamps();
         });
     }

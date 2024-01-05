@@ -79,7 +79,8 @@ class PoliRegisterService
     {
         $id = Crypt::decrypt($id);
 
-        $poli = Poli::firstWhere('id', $id);
+        $poliRegister = PoliRegister::firstWhere('id', $id);
+        $checkupSchedule = CheckupSchedule::firstWhere('id', $poliRegister->checkup_schedule_id);
 
         $status = true;
         $message = 'Data berhasil diambil';
@@ -87,7 +88,8 @@ class PoliRegisterService
         $result = (object) [
             'status' => $status,
             'message' => $message,
-            'poli' => $poli,
+            'poliRegister' => $poliRegister,
+            'checkupSchedule' => $checkupSchedule,
         ];
 
         return $result;
@@ -111,7 +113,7 @@ class PoliRegisterService
         $patient = Patient::firstWhere('user_id', $userId);
 
         $poliRegister = PoliRegister::where("patient_id", $patient->id)
-        ->orderBy('created_at', 'asc')->get();
+            ->orderBy('created_at', 'desc')->get();
 
         $poliRegister = DataTables::of($poliRegister)
             ->addColumn('poliRegisterDateCustom', function ($row) {
@@ -165,7 +167,7 @@ class PoliRegisterService
                 $show =
                     <<<EOF
                     <a href="/pasien/mendaftar-poli/$id">
-                        <button class="btn btn-gradient-info">
+                        <button class="btn btn-info">
                             <i class="bi bi-search"></i>
                         </button>
                     </a>

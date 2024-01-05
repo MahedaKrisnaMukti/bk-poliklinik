@@ -4,6 +4,8 @@ namespace App\Validations\Dashboard\Doctor;
 
 use Illuminate\Support\Facades\Crypt;
 
+use App\Helpers\FormatterCustom;
+
 use App\Models\CheckupSchedule;
 use App\Models\Doctor;
 
@@ -20,6 +22,26 @@ class CheckupScheduleValidation
         $id = Crypt::decrypt($request->id);
 
         $doctor = Doctor::firstWhere('user_id', $id);
+
+        // * Cek apakah hari di jadwal periksa sama dengan hari ini
+        $checkupSchedule = CheckupSchedule::firstWhere('doctor_id', $doctor->id);
+
+        $day = date('l');
+        $day = FormatterCustom::changeDayIndo($day);
+
+        if ($checkupSchedule->day == $day) {
+            $status = false;
+            $statusAlert = 'fail';
+            $message = 'Tidak dapat mengubah jadwal pada hari ini !';
+
+            $result = (object) [
+                'status' => $status,
+                'statusAlert' => $statusAlert,
+                'message' => $message,
+            ];
+
+            return $result;
+        }
 
         // * Ambil data jadwal periksa yang poli dan hari yang sama dengan inputan
         $checkupSchedule = CheckupSchedule::where('poli_id', $doctor->poli_id)

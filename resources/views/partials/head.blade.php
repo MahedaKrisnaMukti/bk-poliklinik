@@ -1,26 +1,21 @@
-{{-- Vendor --}}
-<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/vendors.min.css">
+<link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i%7CComfortaa:300,400,700"
+    rel="stylesheet">
 
-{{-- Bootstrap --}}
-<link rel="stylesheet" type="text/css" href="/app-assets/css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="/app-assets/css/bootstrap-extended.css">
-<link rel="stylesheet" type="text/css" href="/app-assets/css/colors.css">
-<link rel="stylesheet" type="text/css" href="/app-assets/css/components.css">
-<link rel="stylesheet" type="text/css" href="/app-assets/css/themes/dark-layout.css">
-<link rel="stylesheet" type="text/css" href="/app-assets/css/themes/bordered-layout.css">
-<link rel="stylesheet" type="text/css" href="/app-assets/css/themes/semi-dark-layout.css">
+<link rel="stylesheet" type="text/css" href="/assets-chameleon/app-assets/vendors/css/vendors.min.css">
 
-{{-- Page --}}
-<link rel="stylesheet" type="text/css" href="/app-assets/css/core/menu/menu-types/vertical-menu.css">
+<link rel="stylesheet" type="text/css" href="/assets-chameleon/app-assets/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/assets-chameleon/app-assets/css/bootstrap-extended.css">
+<link rel="stylesheet" type="text/css" href="/assets-chameleon/app-assets/css/colors.css">
+<link rel="stylesheet" type="text/css" href="/assets-chameleon/app-assets/css/components.css">
+
+<link rel="stylesheet" type="text/css" href="/assets-chameleon/app-assets/css/core/menu/menu-types/vertical-menu.css">
+<link rel="stylesheet" type="text/css" href="/assets-chameleon/app-assets/css/core/colors/palette-gradient.css">
 
 {{-- Datatable --}}
 <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/responsive.bootstrap5.min.css">
 <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css">
 <link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/tables/datatable/rowGroup.bootstrap5.min.css">
-
-{{-- Swipper --}}
-<link rel="stylesheet" type="text/css" href="/app-assets/vendors/css/extensions/swiper.min.css">
 
 {{-- Bootstrap Icon --}}
 <link rel="stylesheet" href="/assets/custom-packages/bootstrap-icon/bootstrap-icons.css">
@@ -50,5 +45,5 @@
 <script type="text/javascript" src="/assets/custom-packages/tinymce/tinymce.min.js"></script>
 
 {{-- Custom --}}
-<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="/assets-chameleon/assets/css/style.css">
 <link rel="stylesheet" type="text/css" href="/assets/css/style-custom.css">

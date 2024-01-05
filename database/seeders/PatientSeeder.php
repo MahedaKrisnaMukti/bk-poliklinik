@@ -41,5 +41,26 @@ class PatientSeeder extends Seeder
             'identity_card_number' => $identityCardNumber,
             'phone_number' => $phoneNumber,
         ]);
+
+        $user = User::create([
+            'email' => 'patien2@gmail.com',
+            'password' => Hash::make('patien2'),
+        ]);
+
+        $user->assignRole('Pasien');
+
+        $phoneNumber = $faker->e164PhoneNumber();
+        $phoneNumber = str_replace('+', '', $phoneNumber);
+        $phoneNumber = '8' . $phoneNumber;
+
+        $identityCardNumber = $faker->randomNumber(8, true) . $faker->randomNumber(8, true);
+
+        Patient::create([
+            'user_id' => $user->id,
+            'name' => 'Samsul',
+            'address' => $faker->address(),
+            'identity_card_number' => $identityCardNumber,
+            'phone_number' => $phoneNumber,
+        ]);
     }
 }

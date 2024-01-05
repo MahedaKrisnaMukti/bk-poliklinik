@@ -12,7 +12,7 @@
             <div class="card-body">
                 <div class="mb-1">
                     <a href="/admin/dokter">
-                        <button class="btn btn-gradient-secondary">
+                        <button class="btn btn-secondary">
                             <i class="bi bi-arrow-left"></i>
                             Kembali
                         </button>

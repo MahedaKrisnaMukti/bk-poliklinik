@@ -5,16 +5,36 @@ namespace App\Services\Dashboard\Doctor;
 use Illuminate\Support\Facades\Crypt;
 use Yajra\DataTables\Facades\DataTables;
 
+use App\Functions\CartFunction;
+
 use App\Helpers\FormatterCustom;
 
 use App\Models\Checkup;
 use App\Models\CheckupDetail;
 use App\Models\CheckupSchedule;
 use App\Models\Doctor;
+use App\Models\Medicine;
 use App\Models\PoliRegister;
 
 class PatientHistoryService
 {
+    /**
+     * Functions instance.
+     *
+     * @var \App\Functions\CartFunction
+     */
+    protected $cartFunction;
+
+    /**
+     * Create a new service instance.
+     *
+     * @return void
+     */
+    public function __construct(CartFunction $cartFunction)
+    {
+        $this->cartFunction = $cartFunction;
+    }
+
     /**
      * Show service.
      *
@@ -27,9 +47,14 @@ class PatientHistoryService
 
         $poliRegister = PoliRegister::firstWhere('id', $id);
 
+        $cartResult = $this->cartFunction->getContent($poliRegister->patient_id);
+        $cart = $cartResult->cart;
+
         $checkup = Checkup::firstWhere('poli_register_id', $poliRegister->id);
 
         $checkupDetail = CheckupDetail::firstWhere('checkup_id', $checkup->id);
+
+        $medicine = Medicine::orderBy('name', 'asc')->get();
 
         $status = true;
         $message = 'Data berhasil diambil';
@@ -38,8 +63,10 @@ class PatientHistoryService
             'status' => $status,
             'message' => $message,
             'poliRegister' => $poliRegister,
+            'cart' => $cart,
             'checkup' => $checkup,
             'checkupDetail' => $checkupDetail,
+            'medicine' => $medicine,
         ];
 
         return $result;
@@ -96,23 +123,18 @@ class PatientHistoryService
 
                 return $menu;
             })
-            ->addColumn('medicineNameCustom', function ($row) {
-                $checkup = Checkup::firstWhere('poli_register_id', $row->id);
-
-                $checkupDetail = CheckupDetail::firstWhere('checkup_id', $checkup->id);
-
-                $menu = $checkupDetail->medicine->name;
-
-                return $menu;
-            })
             ->addColumn('feeCustom', function ($row) {
                 $checkup = Checkup::firstWhere('poli_register_id', $row->id);
 
-                $checkupDetail = CheckupDetail::firstWhere('checkup_id', $checkup->id);
+                $checkupDetail = CheckupDetail::where('checkup_id', $checkup->id)->get();
 
-                $menu = $checkup->checkup_fee + $checkupDetail->medicine->price;
+                $price = $checkup->checkup_fee;
 
-                $menu = FormatterCustom::formatNumber($menu, true);
+                foreach ($checkupDetail as $rowCheckupDetail) {
+                    $price = $price + $rowCheckupDetail->medicine->price;
+                }
+
+                $menu = FormatterCustom::formatNumber($price, true);
 
                 return $menu;
             })
@@ -122,7 +144,7 @@ class PatientHistoryService
                 $show =
                     <<<EOF
                     <a href="/dokter/riwayat-pasien/$id">
-                        <button class="btn btn-gradient-info">
+                        <button class="btn btn-info">
                             <i class="bi bi-search"></i>
                         </button>
                     </a>
@@ -138,7 +160,6 @@ class PatientHistoryService
                 'medicalRecordNumberCustom',
                 'patientNameCustom',
                 'noteCustom',
-                'medicineNameCustom',
                 'feeCustom',
                 'action',
             ])

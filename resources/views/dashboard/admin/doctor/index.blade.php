@@ -4,13 +4,15 @@
     <div class="col-xl-12 col-md-12 col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">
-                    Tabel Data
-                </h4>
+                <div class="d-flex justify-content-start">
+                    <h4 class="card-title">
+                        Tabel Data
+                    </h4>
+                </div>
 
-                <div class="d-flex align-items-center">
+                <div class="d-flex justify-content-end">
                     <a href="/admin/dokter/create">
-                        <button class="btn btn-gradient-primary">
+                        <button class="btn btn-primary">
                             <i class="bi bi-plus-square"></i>
                             Tambah Data
                         </button>
@@ -19,27 +21,29 @@
             </div>
 
             <div class="card-body">
-                <table class="table table-striped table-hover dt-responsive datatable">
-                    <thead class="text-center">
-                        <tr>
-                            <th>
-                                No
-                            </th>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered datatable">
+                        <thead class="text-center">
+                            <tr>
+                                <th>
+                                    No
+                                </th>
 
-                            <th>
-                                Poli
-                            </th>
+                                <th>
+                                    Poli
+                                </th>
 
-                            <th>
-                                Nama
-                            </th>
+                                <th>
+                                    Nama
+                                </th>
 
-                            <th>
-                                Aksi
-                            </th>
-                        </tr>
-                    </thead>
-                </table>
+                                <th>
+                                    Aksi
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
 
             <form id="formDelete" method="POST" action="/admin/dokter/">

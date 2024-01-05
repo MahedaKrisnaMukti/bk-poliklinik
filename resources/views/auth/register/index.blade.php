@@ -1,100 +1,110 @@
 @extends('layouts.auth')
 
 @section('content')
-    <h4 class="mb-1 pt-2 d-flex justify-content-center">
-        Registrasi Pasien
-    </h4>
-
-    <form id="formSubmit" method="POST" action="/registration" enctype="multipart/form-data">
-        @csrf
-
-        <div class="mb-2">
-            <label class="form-label" for="email">
-                Email
-            </label>
-
-            <input type="text" class="form-control" name="email" id="email" placeholder="Masukan Email"
-                autocomplete="off">
+    <div class="card-header border-0">
+        <div class="text-center mb-1">
+            <img src="/assets/images-custom/logo.png" style="max-height: 80px">
         </div>
 
-        <div class="mb-2">
-            <div class="d-flex justify-content-between">
-                <label class="form-label" for="password">
-                    Password
-                </label>
+        <div class="font-large-1  text-center">
+            Registrasi Pasien
+        </div>
+    </div>
+
+    <div class="card-content">
+        <div class="card-body">
+            <form id="formSubmit" method="POST" action="/registration" enctype="multipart/form-data">
+                @csrf
+
+                <div class="mb-2">
+                    <label class="form-label" for="email">
+                        Email
+                    </label>
+
+                    <input type="text" class="form-control" name="email" id="email" placeholder="Masukan Email"
+                        autocomplete="off">
+                </div>
+
+                <div class="mb-2">
+                    <div class="d-flex justify-content-between">
+                        <label class="form-label" for="password">
+                            Password
+                        </label>
+                    </div>
+
+                    <div class="input-group form-password-toggle">
+                        <input type="password" class="form-control" name="password" id="password"
+                            placeholder="Masukan Password" autocomplete="off">
+
+                        <span class="input-group-text cursor-pointer">
+                            <i class="ft-lock"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mb-2">
+                    <label class="form-label" for="name">
+                        Nama
+                    </label>
+
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Masukan Nama"
+                        autocomplete="off">
+                </div>
+
+                <div class="mb-1">
+                    <label class="form-label" for="address">
+                        Alamat
+                    </label>
+
+                    <textarea class="form-control" name="address" id="address" placeholder="Masukan Alamat" cols="30" rows="5"></textarea>
+                </div>
+
+                <div class="mb-2">
+                    <label class="form-label" for="identityCardNumber">
+                        Nomor KTP
+                    </label>
+
+                    <input type="text" class="form-control" name="identityCardNumber" id="identityCardNumber"
+                        onkeypress="return inputNumber()" placeholder="Masukan Nomor KTP" autocomplete="off">
+                </div>
+
+                <div class="mb-1">
+                    <label class="form-label" for="phoneNumber">
+                        Nomor HP
+                    </label>
+
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            62
+                        </span>
+
+                        <input type="text" class="form-control" name="phoneNumber" id="phoneNumber"
+                            onkeypress="return inputNumber()" placeholder="Masukan Nomor HP" autocomplete="off">
+                    </div>
+                </div>
+
+                <hr>
+
+                <button type="submit" class="btn btn-primary w-100" id="btnSubmit">
+                    <i class="bi bi-check2-circle"></i>
+                    Registrasi
+                </button>
+            </form>
+
+            <div class="mt-1">
+                <p class="text-center">
+                    <span>
+                        Sudah punya akun ?
+                    </span>
+
+                    <a href="/login">
+                        <span>
+                            Login
+                        </span>
+                    </a>
+                </p>
             </div>
-
-            <div class="input-group form-password-toggle">
-                <input type="password" class="form-control" name="password" id="password" placeholder="Masukan Password"
-                    autocomplete="off">
-
-                <span class="input-group-text cursor-pointer">
-                    <i data-feather="eye"></i>
-                </span>
-            </div>
         </div>
-
-        <div class="mb-2">
-            <label class="form-label" for="name">
-                Nama
-            </label>
-
-            <input type="text" class="form-control" name="name" id="name" placeholder="Masukan Nama"
-                autocomplete="off">
-        </div>
-
-        <div class="mb-1">
-            <label class="form-label" for="address">
-                Alamat
-            </label>
-
-            <textarea class="form-control" name="address" id="address" placeholder="Masukan Alamat" cols="30" rows="5"></textarea>
-        </div>
-
-        <div class="mb-2">
-            <label class="form-label" for="identityCardNumber">
-                Nomor KTP
-            </label>
-
-            <input type="text" class="form-control" name="identityCardNumber" id="identityCardNumber"
-                onkeypress="return inputNumber()" placeholder="Masukan Nomor KTP" autocomplete="off">
-        </div>
-
-        <div class="mb-1">
-            <label class="form-label" for="phoneNumber">
-                Nomor HP
-            </label>
-
-            <div class="input-group">
-                <span class="input-group-text">
-                    62
-                </span>
-
-                <input type="text" class="form-control" name="phoneNumber" id="phoneNumber"
-                    onkeypress="return inputNumber()" placeholder="Masukan Nomor HP" autocomplete="off">
-            </div>
-        </div>
-
-        <hr>
-
-        <button type="submit" class="btn btn-gradient-primary w-100" id="btnSubmit">
-            <i class="bi bi-check2-circle"></i>
-            Registrasi
-        </button>
-    </form>
-
-    <div class="mt-1">
-        <p class="text-center">
-            <span>
-                Sudah punya akun ?
-            </span>
-
-            <a href="/login">
-                <span>
-                    Login
-                </span>
-            </a>
-        </p>
     </div>
 @endsection
 

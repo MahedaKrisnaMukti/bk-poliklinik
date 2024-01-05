@@ -21,11 +21,11 @@ return new class extends Migration
 
             $table->string('password');
 
-            $table->string('image')
-                ->default('default.png');
-
             $table->timestamp('email_verified_at')
                 ->nullable();
+
+            $table->string('image')
+                ->default('default.png');
 
             $table->rememberToken();
             $table->timestamps();

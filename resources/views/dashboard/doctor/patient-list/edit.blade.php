@@ -2,27 +2,29 @@
 
 @section('content')
     <div class="col-xl-12 col-md-12 col-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">
-                    Ubah Data
-                </h4>
-            </div>
+        <form id="formSubmit" method="POST" action="/dokter/daftar-pasien/{{ Crypt::encrypt($poliRegister->id) }}"
+            enctype="multipart/form-data">
+            @csrf
+            @method('put')
 
-            <div class="card-body">
-                <div class="mb-1">
-                    <a href="/dokter/daftar-pasien">
-                        <button class="btn btn-gradient-secondary">
-                            <i class="bi bi-arrow-left"></i>
-                            Kembali
-                        </button>
-                    </a>
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        Ubah Data
+                    </h4>
                 </div>
 
-                <form id="formSubmit" method="POST" action="/dokter/daftar-pasien/{{ Crypt::encrypt($poliRegister->id) }}"
-                    enctype="multipart/form-data">
-                    @csrf
-                    @method('put')
+                <div class="card-body">
+                    <div class="mb-1">
+                        <a href="/dokter/daftar-pasien">
+                            <button type="button" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i>
+                                Kembali
+                            </button>
+                        </a>
+                    </div>
+
+                    <input type="hidden" id="patientId" value="{{ $poliRegister->patient_id }}">
 
                     <div class="mb-1">
                         <label class="form-label" for="name">
@@ -42,32 +44,73 @@
                         <textarea class="form-control" name="complaint" id="complaint" placeholder="Masukan Keluhan" autocomplete="off"
                             cols="30" rows="5" readonly>{{ $poliRegister->complaint }}</textarea>
                     </div>
+                </div>
+            </div>
 
+            <div class="mb-1">
+                <div class="row">
+                    @foreach ($medicine as $row)
+                        <div class="col-md-3">
+                            <div class="card">
+                                <img src="{{ $row->image_url }}" class="card-img-top card-image" loading="lazy">
+
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        {{ $row->name }}
+
+                                        <br>
+
+                                        @php
+                                            $qty = 0;
+
+                                            foreach ($cart as $rowCart) {
+                                                if ($row->id == $rowCart['attributes']['id_original']) {
+                                                    $qty = $rowCart['quantity'];
+                                                }
+                                            }
+                                        @endphp
+
+                                        <input type="hidden" id="medicine{{ $row->id }}" value="{{ $qty }}">
+
+                                        <span class="badge bg-success mt-1" id="medicine-text{{ $row->id }}">
+                                            {{ $qty }}
+                                        </span>
+                                    </h3>
+
+                                    <h4 class="card-text mb-1">
+                                        {{ FormatterCustom::formatNumber($row->price, true) }}
+                                    </h4>
+
+                                    <div class="d-flex justify-content-between">
+                                        <button type="button" class="btn btn-warning"
+                                            onclick="addMedicine({{ $row->id }})">
+                                            <i data-feather="plus-square"></i>
+                                            Tambah
+                                        </button>
+
+                                        <button type="button" class="btn btn-danger"
+                                            onclick="removeMedicine({{ $row->id }})">
+                                            <i data-feather="x"></i>
+                                            Hapus
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
                     <div class="mb-1">
                         <label class="form-label" for="note">
                             Catatan
                         </label>
 
                         <textarea class="form-control" name="note" id="note" placeholder="Masukan Catatan" autocomplete="off"
-                            cols="30" rows="5"></textarea>
-                    </div>
-
-                    <div class="mb-1">
-                        <label class="form-label" for="medicineId">
-                            Obat
-                        </label>
-
-                        <select class="form-control select2" name="medicineId" id="medicineId">
-                            <option value="">
-                                Pilih salah satu
-                            </option>
-                            
-                            @foreach ($medicine as $row)
-                                <option value="{{ $row->id }}">
-                                    {{ $row->name }}
-                                </option>
-                            @endforeach
-                        </select>
+                            cols="30" rows="5">{{ $checkup ? $checkup->note : '' }}</textarea>
                     </div>
 
                     <div class="mb-1">
@@ -82,13 +125,14 @@
 
                     <hr>
 
-                    <button type="submit" class="btn btn-gradient-primary w-100" id="btnSubmit">
+                    <button type="submit" class="btn btn-primary w-100" id="btnSubmit">
                         <i class="bi bi-check2-circle"></i>
                         Simpan
                     </button>
-                </form>
+                </div>
             </div>
-        </div>
+        </form>
+
     </div>
 @endsection
 
@@ -103,6 +147,71 @@
                 confirmSubmit(form);
             }
         });
+
+        async function addMedicine(id) {
+            const patientId = $('#patientId').val();
+
+            await axios({
+                method: "post",
+                url: "/dokter/daftar-pasien/tambah-obat",
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+                data: {
+                    id: id,
+                    patientId: patientId,
+                    _token: "{{ csrf_token() }}",
+                },
+            }).then(function(res) {
+                const response = res.data;
+
+                if (response.status) {
+                    const qtyMedicine = $('#medicine' + id).val();
+
+                    $('#medicine' + id).val(Number(qtyMedicine) + 1);
+                    $('#medicine-text' + id).html(Number(qtyMedicine) + 1);
+
+                    iziToast.show({
+                        message: response.message,
+                        color: 'blue',
+                        position: 'topRight'
+                    });
+                }
+            });
+        }
+
+        async function removeMedicine(id) {
+            const qtyMedicine = $('#medicine' + id).val();
+
+            if (Number(qtyMedicine) > 0) {
+                const patientId = $('#patientId').val();
+
+                await axios({
+                    method: "post",
+                    url: "/dokter/daftar-pasien/hapus-obat",
+                    data: {
+                        id: id,
+                        patientId: patientId,
+                        _token: "{{ csrf_token() }}",
+                    },
+                }).then(function(res) {
+                    const response = res.data;
+
+                    if (response.status) {
+                        const qtyMedicine = $('#medicine' + id).val();
+
+                        $('#medicine' + id).val(Number(qtyMedicine) - 1);
+                        $('#medicine-text' + id).html(Number(qtyMedicine) - 1);
+
+                        iziToast.show({
+                            message: response.message,
+                            color: 'blue',
+                            position: 'topRight'
+                        });
+                    }
+                });
+            }
+        }
 
         function validate() {
             const note = $('#note');

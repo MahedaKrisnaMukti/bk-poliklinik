@@ -75,7 +75,7 @@
             imageHeight: 400,
             buttonsStyling: false,
             customClass: {
-                confirmButton: 'btn btn-gradient-primary',
+                confirmButton: 'btn btn-primary',
             },
         })
     }
@@ -102,8 +102,8 @@
             showCancelButton: true,
             buttonsStyling: false,
             customClass: {
-                confirmButton: 'btn btn-gradient-primary',
-                cancelButton: 'btn btn-gradient-secondary margin-cancel-button',
+                confirmButton: 'btn btn-primary',
+                cancelButton: 'btn btn-secondary margin-cancel-button',
             },
             confirmButtonText: 'Simpan',
             cancelButtonText: 'Batal',
@@ -130,8 +130,8 @@
             showCancelButton: true,
             buttonsStyling: false,
             customClass: {
-                confirmButton: 'btn btn-gradient-danger',
-                cancelButton: 'btn btn-gradient-secondary margin-cancel-button',
+                confirmButton: 'btn btn-danger',
+                cancelButton: 'btn btn-secondary margin-cancel-button',
             },
             confirmButtonText: 'Hapus',
             cancelButtonText: 'Batal',

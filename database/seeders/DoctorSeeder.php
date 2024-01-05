@@ -42,7 +42,7 @@ class DoctorSeeder extends Seeder
         $doctor = Doctor::create([
             'user_id' => $user->id,
             'poli_id' => $poli->id,
-            'name' => 'Dokter Ruthboyy',
+            'name' => 'Dokter Bambang',
             'address' => $faker->address(),
             'phone_number' => $phoneNumber,
         ]);
@@ -75,7 +75,7 @@ class DoctorSeeder extends Seeder
         $doctor = Doctor::create([
             'user_id' => $user->id,
             'poli_id' => $poli->id,
-            'name' => 'Dokter Krisna',
+            'name' => 'Dokter Mamat',
             'address' => $faker->address(),
             'phone_number' => $phoneNumber,
         ]);

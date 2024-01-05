@@ -4,9 +4,11 @@
     <div class="col-xl-12 col-md-12 col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">
-                    Jadwal Periksa
-                </h4>
+                <div class="d-flex justify-content-start">
+                    <h4 class="card-title">
+                        Jadwal Periksa
+                    </h4>
+                </div>
             </div>
 
             <div class="card-body">
@@ -116,7 +118,7 @@
 
                     <hr>
 
-                    <button type="submit" class="btn btn-gradient-primary w-100" id="btnSubmit">
+                    <button type="submit" class="btn btn-primary w-100" id="btnSubmit">
                         <i class="bi bi-check2-circle"></i>
                         Simpan
                     </button>

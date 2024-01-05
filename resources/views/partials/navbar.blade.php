@@ -1,50 +1,51 @@
-<nav
-    class="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow container-xxl">
-    <div class="navbar-container d-flex content">
-        <div class="bookmark-wrapper d-flex align-items-center">
-            <ul class="nav navbar-nav d-xl-none">
-                <li class="nav-item">
-                    <a class="nav-link menu-toggle" href="#">
-                        <i class="ficon" data-feather="menu"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
+<nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
+    <div class="navbar-wrapper">
+        <div class="navbar-container content">
+            <div class="collapse navbar-collapse show" id="navbar-mobile">
+                <ul class="nav navbar-nav mr-auto float-left">
+                </ul>
 
-        <ul class="nav navbar-nav align-items-center ms-auto">
-            <li class="nav-item dropdown dropdown-user">
-                <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="user-nav d-sm-flex d-none">
-                        <span class="user-name fw-bolder">
-                            {{ auth()->user()->username }}
-                        </span>
-                    </div>
-
-                    <span class="avatar">
-                        <img class="round" src="{{ auth()->user()->image_url }}" height="40" width="40">
-
-                        <span class="avatar-status-online"></span>
-                    </span>
-                </a>
-
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
-                    <a href="/menu-utama/profil" class="dropdown-item">
-                        <i class="me-50" data-feather="user"></i>
-                        Ubah Profil
-                    </a>
-
-                    <form id="form_logout" method="POST" action="/logout">
-                        @csrf
-
-                        <a href="javascript:void(0)" class="dropdown-item"
-                            onclick="document.getElementById('form_logout').submit()">
-                            <i class="me-50" data-feather="power"></i>
-                            Logout
+                <ul class="nav navbar-nav float-right">
+                    <li class="dropdown dropdown-user nav-item">
+                        <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                            <span class="avatar avatar-online">
+                                <img src="{{ auth()->user()->image_url }}">
+                            </span>
                         </a>
-                    </form>
-                </div>
-            </li>
-        </ul>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="arrow_box_right">
+                                <a class="dropdown-item" href="#">
+                                    <span class="avatar avatar-online">
+                                        <img src="{{ auth()->user()->image_url }}">
+
+                                        <span class="user-name text-bold-700 ml-1">
+                                            -
+                                        </span>
+                                    </span>
+                                </a>
+
+                                <a href="/menu-utama/profil" class="dropdown-item">
+                                    <i class="ft-user"></i>
+                                    Ubah Profil
+                                </a>
+
+                                <div class="dropdown-divider"></div>
+
+                                <form id="form_logout" method="POST" action="/logout">
+                                    @csrf
+
+                                    <a href="javascript:void(0)" class="dropdown-item"
+                                        onclick="document.getElementById('form_logout').submit()">
+                                        <i class="me-50" data-feather="power"></i>
+                                        Logout
+                                    </a>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </nav>

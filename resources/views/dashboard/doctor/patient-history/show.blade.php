@@ -12,7 +12,7 @@
             <div class="card-body">
                 <div class="mb-1">
                     <a href="/dokter/riwayat-pasien">
-                        <button class="btn btn-gradient-secondary">
+                        <button class="btn btn-secondary">
                             <i class="bi bi-arrow-left"></i>
                             Kembali
                         </button>
@@ -57,15 +57,6 @@
                 </div>
 
                 <div class="mb-1">
-                    <label class="form-label" for="medicineId">
-                        Obat
-                    </label>
-
-                    <input type="text" class="form-control" name="medicineId" id="medicineId"
-                        value="{{ $checkupDetail->medicine->name }}" placeholder="Masukan Obat" autocomplete="off" readonly>
-                </div>
-
-                <div class="mb-1">
                     <label class="form-label" for="fee">
                         Biaya
                     </label>
@@ -90,6 +81,46 @@
                         value="{{ FormatterCustom::formatDate($poliRegister->poli_register_date) }}"
                         placeholder="Masukan Tanggal Periksa" autocomplete="off" readonly>
                 </div>
+            </div>
+        </div>
+
+        <div class="mb-1">
+            <div class="row">
+                @foreach ($medicine as $row)
+                    <div class="col-md-3">
+                        <div class="card">
+                            <img src="{{ $row->image_url }}" class="card-img-top card-image" loading="lazy">
+
+                            <div class="card-body">
+                                <h3 class="card-title">
+                                    {{ $row->name }}
+
+                                    <br>
+
+                                    @php
+                                        $qty = 0;
+
+                                        foreach ($cart as $rowCart) {
+                                            if ($row->id == $rowCart['attributes']['id_original']) {
+                                                $qty = $rowCart['quantity'];
+                                            }
+                                        }
+                                    @endphp
+
+                                    <input type="hidden" id="medicine{{ $row->id }}" value="{{ $qty }}">
+
+                                    <span class="badge bg-success mt-1" id="medicine-text{{ $row->id }}">
+                                        {{ $qty }}
+                                    </span>
+                                </h3>
+
+                                <h4 class="card-text mb-1">
+                                    {{ FormatterCustom::formatNumber($row->price, true) }}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

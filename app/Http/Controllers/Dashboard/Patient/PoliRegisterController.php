@@ -85,7 +85,8 @@ class PoliRegisterController extends Controller
             'title' => 'BK Poliklinik',
             'description' => '',
             'keywords' => '',
-            'poli' => $result->poli,
+            'poliRegister' => $result->poliRegister,
+            'checkupSchedule' => $result->checkupSchedule,
         ]);
     }
 

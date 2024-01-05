@@ -22,7 +22,17 @@ class PoliSeeder extends Seeder
 
         Poli::create([
             'name' => 'Poli Gigi',
-            'description' => 'Poli THT',
+            'description' => 'Poli Gigi',
+        ]);
+
+        Poli::create([
+            'name' => 'Poli Gizi',
+            'description' => 'Poli Gizi',
+        ]);
+
+        Poli::create([
+            'name' => 'Poli Mata',
+            'description' => 'Poli Mata',
         ]);
     }
 }

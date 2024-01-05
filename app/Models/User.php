@@ -61,11 +61,14 @@ class User extends Authenticatable
      */
     public function getImageUrlAttribute()
     {
+        $fileUrl = null;
+
         if ($this->image) {
-            return asset('storage/images/users/' . $this->image);
+            $url = config('s3.url');
+            $fileUrl = $url . 'profile/' . $this->image;
         }
 
-        return null;
+        return $fileUrl;
     }
 
     /**

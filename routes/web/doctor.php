@@ -60,6 +60,12 @@ Route::group(
         Route::get('daftar-pasien/{id}/edit', [PatientListController::class, 'edit'])
             ->name('edit');
 
+        Route::post('daftar-pasien/tambah-obat', [PatientListController::class, 'addMedicine'])
+            ->name('addMedicine');
+
+        Route::post('daftar-pasien/hapus-obat', [PatientListController::class, 'removeMedicine'])
+            ->name('removeMedicine');
+
         Route::put('daftar-pasien/{id}', [PatientListController::class, 'update'])
             ->name('update');
     }

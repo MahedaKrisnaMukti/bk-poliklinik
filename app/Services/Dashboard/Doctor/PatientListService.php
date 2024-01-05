@@ -5,6 +5,8 @@ namespace App\Services\Dashboard\Doctor;
 use Illuminate\Support\Facades\Crypt;
 use Yajra\DataTables\Facades\DataTables;
 
+use App\Functions\CartFunction;
+
 use App\Models\Checkup;
 use App\Models\CheckupDetail;
 use App\Models\CheckupSchedule;
@@ -14,6 +16,23 @@ use App\Models\PoliRegister;
 
 class PatientListService
 {
+    /**
+     * Functions instance.
+     *
+     * @var \App\Functions\CartFunction
+     */
+    protected $cartFunction;
+
+    /**
+     * Create a new service instance.
+     *
+     * @return void
+     */
+    public function __construct(CartFunction $cartFunction)
+    {
+        $this->cartFunction = $cartFunction;
+    }
+
     /**
      * Edit service.
      *
@@ -26,6 +45,11 @@ class PatientListService
 
         $poliRegister = PoliRegister::firstWhere('id', $id);
 
+        $cartResult = $this->cartFunction->getContent($poliRegister->patient_id);
+        $cart = $cartResult->cart;
+
+        $checkup = Checkup::firstWhere('poli_register_id', $poliRegister->id);
+
         $medicine = Medicine::orderBy('name', 'asc')->get();
 
         $status = true;
@@ -35,6 +59,8 @@ class PatientListService
             'status' => $status,
             'message' => $message,
             'poliRegister' => $poliRegister,
+            'cart' => $cart,
+            'checkup' => $checkup,
             'medicine' => $medicine,
         ];
 
@@ -51,6 +77,11 @@ class PatientListService
     {
         $id = Crypt::decrypt($request->id);
 
+        $poliRegister = PoliRegister::firstWhere('id', $id);
+
+        $cartResult = $this->cartFunction->getContent($poliRegister->patient_id);
+        $cart = $cartResult->cart;
+
         $data = [
             'status' => 'Sudah Diperiksa',
         ];
@@ -66,11 +97,20 @@ class PatientListService
 
             Checkup::where('id', $checkup->id)->update($data);
 
-            $data = [
-                'medicine_id' => $request->medicineId,
-            ];
+            CheckupDetail::where('checkup_id', $checkup->id)->delete();
 
-            CheckupDetail::where('checkup_id', $checkup->id)->update($data);
+            foreach ($cart as $row) {
+                $qty = $row['quantity'];
+
+                for ($i = 0; $i < $qty; $i++) {
+                    $data = [
+                        'checkup_id' => $checkup->id,
+                        'medicine_id' => $row['attributes']['id_original'],
+                    ];
+
+                    CheckupDetail::create($data);
+                }
+            }
         } else {
             $data = [
                 'poli_register_id' => $id,
@@ -80,12 +120,18 @@ class PatientListService
 
             $checkup = Checkup::create($data);
 
-            $data = [
-                'checkup_id' => $checkup->id,
-                'medicine_id' => $request->medicineId,
-            ];
+            foreach ($cart as $row) {
+                $qty = $row['quantity'];
 
-            CheckupDetail::create($data);
+                for ($i = 0; $i < $qty; $i++) {
+                    $data = [
+                        'checkup_id' => $checkup->id,
+                        'medicine_id' => $row['attributes']['id_original'],
+                    ];
+
+                    CheckupDetail::create($data);
+                }
+            }
         }
 
         $status = true;
@@ -144,7 +190,7 @@ class PatientListService
                 $edit =
                     <<<EOF
                     <a href="/dokter/daftar-pasien/$id/edit">
-                        <button class="btn btn-gradient-success">
+                        <button class="btn btn-success">
                             <i class="bi bi-pencil-square"></i>
                         </button>
                     </a>
@@ -168,6 +214,100 @@ class PatientListService
             'status' => $status,
             'message' => $message,
             'poliRegister' => $poliRegister,
+        ];
+
+        return $result;
+    }
+
+    /**
+     * Add medicine service.
+     *
+     * @param  $request
+     * @return  ArrayObject
+     */
+    function addMedicine($request)
+    {
+        $itemId = $request->id;
+        $patientId = $request->patientId;
+
+        $result = $this->cartFunction->checkItem($patientId, $itemId);
+
+        if ($result->status) {
+            $item = $result->item;
+            $quantity = $item->quantity + 1;
+
+            $data = [
+                'quantity' => [
+                    'relative' => false,
+                    'value' => $quantity
+                ],
+            ];
+
+            $result = $this->cartFunction->update($patientId, $itemId, $data);
+        } else {
+            $medicine = Medicine::firstWhere('id', $itemId);
+
+            $data = [
+                'id' => $request->id,
+                'name' => $medicine->name,
+                'price' => $medicine->price,
+                'quantity' => 1,
+                'attributes' => [
+                    'id_original' => $medicine->id,
+                ],
+            ];
+
+            $result = $this->cartFunction->add($patientId, $data);
+        }
+
+        $status = $result->status;
+        $message = $result->message;
+
+        $result = (object) [
+            'status' => $status,
+            'message' => $message,
+        ];
+
+        return $result;
+    }
+
+    /**
+     * Remove medicine service.
+     *
+     * @param  $request
+     * @return ArrayObject
+     */
+    public function removeMedicine($request)
+    {
+        $itemId = $request->id;
+        $patientId = $request->patientId;
+
+        $result = $this->cartFunction->checkItem($patientId, $itemId);
+
+        if ($result->status) {
+            $item = $result->item;
+            $quantity = $item->quantity - 1;
+
+            if ($quantity >= 1) {
+                $data = [
+                    'quantity' => [
+                        'relative' => false,
+                        'value' => $quantity
+                    ],
+                ];
+
+                $result = $this->cartFunction->update($patientId, $itemId, $data);
+            } else {
+                $result = $this->cartFunction->remove($patientId, $itemId);
+            }
+        }
+
+        $status = $result->status;
+        $message = $result->message;
+
+        $result = (object) [
+            'status' => $status,
+            'message' => $message,
         ];
 
         return $result;

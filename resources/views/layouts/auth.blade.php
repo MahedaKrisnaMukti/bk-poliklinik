@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
 
 <head>
     <meta charset="UTF-8">
@@ -11,29 +12,37 @@
     <meta name="keywords" content="{{ $keywords }}" />
     <link rel="shortcut icon" href="/assets/images-custom/logo.png">
 
-    <link rel="stylesheet" href="/assets/vendor/css/pages/page-auth.css" />
-
     @include('partials.head')
 
+    <link rel="stylesheet" type="text/css" href="/assets-chameleon/app-assets/css/pages/login-register.css">
+
     @yield('custom_head')
+
 </head>
 
 @yield('custom_css')
 
-<body>
-    <div class="container-xxl">
-        <div class="authentication-wrapper authentication-basic container-p-y">
-            <div class="authentication-inner py-4">
 
-                @include('partials.alert')
+<body class="vertical-layout vertical-menu 1-column  bg-full-screen-image blank-page blank-page" data-open="click"
+    data-menu="vertical-menu" data-color="bg-gradient-x-purple-blue" data-col="1-column">
+    <div class="app-content content">
+        <div class="content-wrapper">
+            <div class="content-wrapper-before"></div>
+            <div class="content-header row"></div>
 
-                <div class="card">
-                    <div class="card-body">
-                        <img class="logo d-flex" src="/assets/images-custom/logo.png" style="margin: auto">
+            <div class="content-body">
+                <section class="flexbox-container">
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <div class="col-lg-4 col-md-6 col-10 box-shadow-2 p-0">
+                            <div class="card border-grey border-lighten-3 px-1 py-1 m-0">
+                                @include('partials.alert')
 
-                        @yield('content')
+                                @yield('content')
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </section>
+
             </div>
         </div>
     </div>
@@ -43,6 +52,7 @@
     @include('partials.custom-js')
 
     @yield('custom_js')
+
 </body>
 
 </html>

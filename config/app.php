@@ -187,6 +187,7 @@ return [
          */
         Yajra\DataTables\DataTablesServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Darryldecode\Cart\CartServiceProvider::class,
 
         /*
          * Package Service Providers... (Helper)
@@ -217,6 +218,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'FormatterCustom' => App\Helpers\FormatterCustom::class,
     ])

@@ -4,37 +4,41 @@
     <div class="col-xl-12 col-md-12 col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">
-                    Tabel Data
-                </h4>
+                <div class="d-flex justify-content-start">
+                    <h4 class="card-title">
+                        Tabel Data
+                    </h4>
+                </div>
             </div>
 
             <div class="card-body">
-                <table class="table table-striped table-hover dt-responsive datatable">
-                    <thead class="text-center">
-                        <tr>
-                            <th>
-                                No
-                            </th>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered datatable">
+                        <thead class="text-center">
+                            <tr>
+                                <th>
+                                    No
+                                </th>
 
-                            <th>
-                                Nomor Antrian
-                            </th>
+                                <th>
+                                    Nomor Antrian
+                                </th>
 
-                            <th>
-                                Nama Pasien
-                            </th>
+                                <th>
+                                    Nama Pasien
+                                </th>
 
-                            <th>
-                                Keluhan
-                            </th>
+                                <th>
+                                    Keluhan
+                                </th>
 
-                            <th>
-                                Aksi
-                            </th>
-                        </tr>
-                    </thead>
-                </table>
+                                <th>
+                                    Aksi
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -1,21 +1,7 @@
-<footer class="footer footer-static footer-light">
-    <p class="clearfix mb-0">
-        <span class="float-md-start d-block d-md-inline-block mt-25">
-            COPYRIGHT &copy; 2023
-
-            <span class="ms-25">
-                <b>
-                    BK Poliklinik
-                </b>
-            </span>
-
-            <span class="d-none d-sm-inline-block">
-                All rights Reserved
-            </span>
+<footer class="footer footer-static footer-light navbar-border navbar-shadow">
+    <div class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2">
+        <span class="float-md-left d-block d-md-inline-block">
+            COPYRIGHT © 2023 BK Poliklinik All rights Reserved
         </span>
-    </p>
+    </div>
 </footer>
-
-<button class="btn btn-primary btn-icon scroll-top" type="button">
-    <i data-feather="arrow-up"></i>
-</button>

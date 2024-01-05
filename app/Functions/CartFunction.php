@@ -4,18 +4,25 @@ namespace App\Functions;
 
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 
+use App\Models\Patient;
+
 class CartFunction
 {
     /**
      * Check item function.
      *
+     * @param  $patientId
      * @param  $itemId
      * @return ArrayObject
      */
-    public function checkItem($itemId)
+    public function checkItem($patientId, $itemId)
     {
         $userId = auth()->user()->id;
-        $item = Cart::session($userId)->get($itemId);
+
+        $patient = Patient::firstWhere('id', $patientId);
+
+        $sessionId = 'doctor' . $userId . 'patient' . $patient->user_id;
+        $item = Cart::session($sessionId)->get($itemId);
 
         if ($item) {
             $status = true;
@@ -38,12 +45,17 @@ class CartFunction
     /**
      * Get content function.
      *
+     * @param  $patientId
      * @return ArrayObject
      */
-    public function getContent()
+    public function getContent($patientId)
     {
         $userId = auth()->user()->id;
-        $cart = Cart::session($userId)->getContent();
+
+        $patient = Patient::firstWhere('id', $patientId);
+
+        $sessionId = 'doctor' . $userId . 'patient' . $patient->user_id;
+        $cart = Cart::session($sessionId)->getContent();
 
         $status = true;
         $message = 'Data berhasil dibuat';
@@ -60,19 +72,24 @@ class CartFunction
     /**
      * Add function.
      *
+     * @param  $patientId
      * @param  $item
      * @return ArrayObject
      */
-    public function add($item)
+    public function add($patientId, $item)
     {
         $userId = auth()->user()->id;
-        Cart::session($userId)->add($item);
+
+        $patient = Patient::firstWhere('id', $patientId);
+
+        $sessionId = 'doctor' . $userId . 'patient' . $patient->user_id;
+        Cart::session($sessionId)->add($item);
 
         $item = (object) $item;
         $name = $item->name;
 
         $status = true;
-        $message = $name . ' berhasil ditambahkan ke keranjang !';
+        $message = $name . ' berhasil ditambahkan !';
 
         $result = (object) [
             'status' => $status,
@@ -85,22 +102,27 @@ class CartFunction
     /**
      * Update function.
      *
+     * @param  $patientId
      * @param  $itemId
      * @param  $item
      * @return ArrayObject
      */
-    public function update($itemId, $item)
+    public function update($patientId, $itemId, $item)
     {
-        $result = $this->checkItem($itemId);
+        $result = $this->checkItem($patientId, $itemId);
 
         $userId = auth()->user()->id;
-        Cart::session($userId)->update($itemId, $item);
+
+        $patient = Patient::firstWhere('id', $patientId);
+
+        $sessionId = 'doctor' . $userId . 'patient' . $patient->user_id;
+        Cart::session($sessionId)->update($itemId, $item);
 
         $item = $result->item;
         $name = $item->name;
 
         $status = true;
-        $message = $name . ' berhasil diubah di keranjang !';
+        $message = 'Jumlah ' . $name . ' berhasil diubah !';
 
         $result = (object) [
             'status' => $status,
@@ -113,21 +135,26 @@ class CartFunction
     /**
      * Remove function.
      *
+     * @param  $patientId
      * @param  $itemId
      * @return ArrayObject
      */
-    public function remove($itemId)
+    public function remove($patientId, $itemId)
     {
-        $result = $this->checkItem($itemId);
+        $result = $this->checkItem($patientId, $itemId);
 
         $userId = auth()->user()->id;
-        Cart::session($userId)->remove($itemId);
+
+        $patient = Patient::firstWhere('id', $patientId);
+
+        $sessionId = 'doctor' . $userId . 'patient' . $patient->user_id;
+        Cart::session($sessionId)->remove($itemId);
 
         $item = $result->item;
         $name = $item->name;
 
         $status = true;
-        $message = $name . ' berhasil dihapus dari keranjang !';
+        $message = 'Jumlah ' . $name . ' berhasil diubah !';
 
         $result = (object) [
             'status' => $status,
@@ -140,16 +167,20 @@ class CartFunction
     /**
      * Clear function.
      *
-     * @param  $itemId
+     * @param  $request
      * @return ArrayObject
      */
-    public function clear()
+    public function clear($request)
     {
         $userId = auth()->user()->id;
-        Cart::session($userId)->clear();
+
+        $patient = Patient::firstWhere('id', $request->patientId);
+
+        $sessionId = 'doctor' . $userId . 'patient' . $patient->user_id;
+        Cart::session($sessionId)->clear();
 
         $status = true;
-        $message = 'Keranjan berhasil dikosongkan !';
+        $message = 'Keranjang berhasil dikosongkan !';
 
         $result = (object) [
             'status' => $status,
