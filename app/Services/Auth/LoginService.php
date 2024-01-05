@@ -3,6 +3,7 @@
 namespace App\Services\Auth;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 use App\Models\Admin;
 use App\Models\Doctor;
@@ -47,6 +48,8 @@ class LoginService
             $patient = Patient::firstWhere('user_id', $user->id);
             $name = $patient->name;
         }
+
+        Session::put('name', $name);
 
         $status = true;
         $statusAlert = 'toast';

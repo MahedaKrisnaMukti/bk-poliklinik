@@ -45,12 +45,15 @@ class PatientListService
 
         $poliRegister = PoliRegister::firstWhere('id', $id);
 
-        $cartResult = $this->cartFunction->getContent($poliRegister->patient_id);
-        $cart = $cartResult->cart;
-
         $checkup = Checkup::firstWhere('poli_register_id', $poliRegister->id);
 
+        $checkupDetail = [];
+
         $medicine = Medicine::orderBy('name', 'asc')->get();
+
+        if ($checkup) {
+            $checkupDetail = CheckupDetail::where('checkup_id', $checkup->id)->get();
+        }
 
         $status = true;
         $message = 'Data berhasil diambil';
@@ -59,8 +62,8 @@ class PatientListService
             'status' => $status,
             'message' => $message,
             'poliRegister' => $poliRegister,
-            'cart' => $cart,
             'checkup' => $checkup,
+            'checkupDetail' => $checkupDetail,
             'medicine' => $medicine,
         ];
 

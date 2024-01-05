@@ -66,8 +66,8 @@ class PatientListController extends Controller
             'description' => '',
             'keywords' => '',
             'poliRegister' => $result->poliRegister,
-            'cart' => $result->cart,
             'checkup' => $result->checkup,
+            'checkupDetail' => $result->checkupDetail,
             'medicine' => $result->medicine,
         ]);
     }

@@ -47,12 +47,9 @@ class PatientHistoryService
 
         $poliRegister = PoliRegister::firstWhere('id', $id);
 
-        $cartResult = $this->cartFunction->getContent($poliRegister->patient_id);
-        $cart = $cartResult->cart;
-
         $checkup = Checkup::firstWhere('poli_register_id', $poliRegister->id);
 
-        $checkupDetail = CheckupDetail::firstWhere('checkup_id', $checkup->id);
+        $checkupDetail = CheckupDetail::where('checkup_id', $checkup->id)->get();
 
         $medicine = Medicine::orderBy('name', 'asc')->get();
 
@@ -63,7 +60,6 @@ class PatientHistoryService
             'status' => $status,
             'message' => $message,
             'poliRegister' => $poliRegister,
-            'cart' => $cart,
             'checkup' => $checkup,
             'checkupDetail' => $checkupDetail,
             'medicine' => $medicine,

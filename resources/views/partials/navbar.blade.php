@@ -20,7 +20,7 @@
                                         <img src="{{ auth()->user()->image_url }}">
 
                                         <span class="user-name text-bold-700 ml-1">
-                                            -
+                                            {{ Session::get('name') }}
                                         </span>
                                     </span>
                                 </a>

@@ -63,9 +63,9 @@
                                         @php
                                             $qty = 0;
 
-                                            foreach ($cart as $rowCart) {
-                                                if ($row->id == $rowCart['attributes']['id_original']) {
-                                                    $qty = $rowCart['quantity'];
+                                            foreach ($checkupDetail as $rowCheckupDetail) {
+                                                if ($row->id == $rowCheckupDetail->medicine_id) {
+                                                    $qty++;
                                                 }
                                             }
                                         @endphp

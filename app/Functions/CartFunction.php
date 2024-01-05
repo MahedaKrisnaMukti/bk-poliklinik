@@ -167,14 +167,14 @@ class CartFunction
     /**
      * Clear function.
      *
-     * @param  $request
+     * @param  $patientId
      * @return ArrayObject
      */
-    public function clear($request)
+    public function clear($patientId)
     {
         $userId = auth()->user()->id;
 
-        $patient = Patient::firstWhere('id', $request->patientId);
+        $patient = Patient::firstWhere('id', $patientId);
 
         $sessionId = 'doctor' . $userId . 'patient' . $patient->user_id;
         Cart::session($sessionId)->clear();

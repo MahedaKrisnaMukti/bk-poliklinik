@@ -57,22 +57,6 @@
                 </div>
 
                 <div class="mb-1">
-                    <label class="form-label" for="fee">
-                        Biaya
-                    </label>
-
-                    <div class="input-group">
-                        <span class="input-group-text">
-                            Rp
-                        </span>
-
-                        <input type="text" class="form-control" name="fee" id="fee"
-                            value="{{ FormatterCustom::formatNumber($checkup->checkup_fee + $checkupDetail->medicine->price) }}"
-                            onkeypress="return inputNumber()" placeholder="Masukan Biaya" autocomplete="off" readonly>
-                    </div>
-                </div>
-
-                <div class="mb-1">
                     <label class="form-label" for="poliRegisterDate">
                         Tanggal Periksa
                     </label>
@@ -89,7 +73,7 @@
                 @foreach ($medicine as $row)
                     <div class="col-md-3">
                         <div class="card">
-                            <img src="{{ $row->image_url }}" class="card-img-top card-image" loading="lazy">
+                            <img src="{{ $row->image_url }}" class="card-img-top card-image">
 
                             <div class="card-body">
                                 <h3 class="card-title">
@@ -100,9 +84,9 @@
                                     @php
                                         $qty = 0;
 
-                                        foreach ($cart as $rowCart) {
-                                            if ($row->id == $rowCart['attributes']['id_original']) {
-                                                $qty = $rowCart['quantity'];
+                                        foreach ($checkupDetail as $rowCheckupDetail) {
+                                            if ($row->id == $rowCheckupDetail->medicine_id) {
+                                                $qty++;
                                             }
                                         }
                                     @endphp
