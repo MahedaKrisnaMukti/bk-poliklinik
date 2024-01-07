@@ -219,7 +219,8 @@ class PoliRegisterService
             $day = FormatterCustom::changeDayIndo($day);
 
             $checkupSchedule = CheckupSchedule::where('poli_id', $request->poliId)
-                ->where('day', $day);
+                ->where('day', $day)
+                ->where('status', 'Aktif');
 
             if ($request->poliRegisterDate == $today) {
                 $checkupSchedule = $checkupSchedule->where('end_time', '>', $hourNow);

@@ -55,6 +55,58 @@ class CheckupScheduleController extends Controller
     }
 
     /**
+     * Create.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+
+        return view('dashboard.doctor.checkup-schedule.create', [
+            'title' => 'BK Poliklinik',
+            'description' => '',
+            'keywords' => '',
+        ]);
+    }
+
+    /**
+     * Store.
+     *
+     * @param  \App\Http\Requests\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $validation = $this->checkupScheduleValidation->store($request);
+
+        if (!$validation->status) {
+            return redirect()->back()->with($validation->statusAlert, $validation->message);
+        }
+
+        $result = $this->checkupScheduleService->store($request);
+
+        return redirect()->back()->with($result->statusAlert, $result->message);
+    }
+
+    /**
+     * Edit.
+     *
+     * @param  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $result = $this->checkupScheduleService->edit($id);
+
+        return view('dashboard.doctor.checkup-schedule.edit', [
+            'title' => 'BK Poliklinik',
+            'description' => '',
+            'keywords' => '',
+            'checkupSchedule' => $result->checkupSchedule,
+        ]);
+    }
+
+    /**
      * Update.
      *
      * @param  \App\Http\Requests\Request  $request
@@ -73,5 +125,24 @@ class CheckupScheduleController extends Controller
         $result = $this->checkupScheduleService->update($request);
 
         return redirect()->back()->with($result->statusAlert, $result->message);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Ajax
+    |--------------------------------------------------------------------------
+    */
+
+
+    /**
+     * Datatable.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function datatable()
+    {
+        $result = $this->checkupScheduleService->datatable();
+
+        return $result->checkupSchedule;
     }
 }

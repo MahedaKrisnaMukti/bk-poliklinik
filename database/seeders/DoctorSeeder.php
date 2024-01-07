@@ -56,6 +56,7 @@ class DoctorSeeder extends Seeder
             'day' => $day,
             'start_time' => '01:00:00',
             'end_time' => '23:59:00',
+            'status' => 'Aktif',
         ]);
 
         // * Dokter 2
@@ -86,6 +87,7 @@ class DoctorSeeder extends Seeder
             'day' => 'Senin',
             'start_time' => '09:00:00',
             'end_time' => '10:00:00',
+            'status' => 'Aktif',
         ]);
     }
 }

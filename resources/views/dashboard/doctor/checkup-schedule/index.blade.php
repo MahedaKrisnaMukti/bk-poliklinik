@@ -6,123 +6,56 @@
             <div class="card-header">
                 <div class="d-flex justify-content-start">
                     <h4 class="card-title">
-                        Jadwal Periksa
+                        Tabel Data
                     </h4>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <a href="/dokter/jadwal-periksa/create">
+                        <button class="btn btn-primary">
+                            <i class="bi bi-plus-square"></i>
+                            Tambah Data
+                        </button>
+                    </a>
                 </div>
             </div>
 
             <div class="card-body">
-                <form id="formSubmit" method="POST" action="/dokter/jadwal-periksa/{{ Crypt::encrypt(auth()->user()->id) }}"
-                    enctype="multipart/form-data">
-                    @csrf
-                    @method('put')
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered datatable">
+                        <thead class="text-center">
+                            <tr>
+                                <th>
+                                    No
+                                </th>
 
-                    <div class="mb-1">
-                        <label class="form-label" for="day">
-                            Hari
-                        </label>
+                                <th>
+                                    Nama
+                                </th>
 
-                        <select class="form-control select2" name="day" id="day">
-                            @if ($checkupSchedule)
-                                <option value="{{ $checkupSchedule->day }}">
-                                    {{ $checkupSchedule->day }}
-                                </option>
+                                <th>
+                                    Hari
+                                </th>
 
-                                @if ($checkupSchedule->day != 'Senin')
-                                    <option value="Senin">
-                                        Senin
-                                    </option>
-                                @endif
+                                <th>
+                                    Jam Mulai
+                                </th>
 
-                                @if ($checkupSchedule->day != 'Selasa')
-                                    <option value="Selasa">
-                                        Selasa
-                                    </option>
-                                @endif
+                                <th>
+                                    Jam Selesai
+                                </th>
 
-                                @if ($checkupSchedule->day != 'Rabu')
-                                    <option value="Rabu">
-                                        Rabu
-                                    </option>
-                                @endif
+                                <th>
+                                    Status
+                                </th>
 
-                                @if ($checkupSchedule->day != 'Kamis')
-                                    <option value="Kamis">
-                                        Kamis
-                                    </option>
-                                @endif
-
-                                @if ($checkupSchedule->day != 'Jumat')
-                                    <option value="Jumat">
-                                        Jumat
-                                    </option>
-                                @endif
-
-                                @if ($checkupSchedule->day != 'Sabtu')
-                                    <option value="Sabtu">
-                                        Sabtu
-                                    </option>
-                                @endif
-                            @else
-                                <option value="">
-                                    Pilih salah satu
-                                </option>
-
-                                <option value="Senin">
-                                    Senin
-                                </option>
-
-                                <option value="Selasa">
-                                    Selasa
-                                </option>
-
-                                <option value="Rabu">
-                                    Rabu
-                                </option>
-
-                                <option value="Kamis">
-                                    Kamis
-                                </option>
-
-                                <option value="Jumat">
-                                    Jumat
-                                </option>
-
-                                <option value="Sabtu">
-                                    Sabtu
-                                </option>
-                            @endif
-
-                        </select>
-                    </div>
-
-                    <div class="mb-1">
-                        <label class="form-label" for="startTime">
-                            Jam Mulai
-                        </label>
-
-                        <input type="text" class="form-control custom-timepicker" name="startTime" id="startTime"
-                            value="{{ $checkupSchedule ? $checkupSchedule->start_time : '' }}"
-                            placeholder="Masukan Jam Mulai" autocomplete="off">
-                    </div>
-
-                    <div class="mb-1">
-                        <label class="form-label" for="endTime">
-                            Jam Selesai
-                        </label>
-
-                        <input type="text" class="form-control custom-timepicker" name="endTime" id="endTime"
-                            value="{{ $checkupSchedule ? $checkupSchedule->end_time : '' }}"
-                            placeholder="Masukan Jam Selesai" autocomplete="off">
-                    </div>
-
-                    <hr>
-
-                    <button type="submit" class="btn btn-primary w-100" id="btnSubmit">
-                        <i class="bi bi-check2-circle"></i>
-                        Simpan
-                    </button>
-                </form>
+                                <th>
+                                    Aksi
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -130,61 +63,60 @@
 
 @section('custom_js')
     <script>
-        $('#formSubmit').submit(function(e) {
-            let status = validate();
-            let form = this;
-            e.preventDefault();
+        $('.datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ordering: false,
+            ajax: "{{ url('/dokter/jadwal-periksa/datatable') }}",
+            columnDefs: [{
+                targets: "_all",
+                className: 'text-center',
+            }],
+            columns: [{
+                    data: 'id',
+                    render: function(data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
 
-            if (status) {
-                confirmSubmit(form);
-            }
+                {
+                    data: 'doctorNameCostum',
+                    name: 'doctorNameCostum'
+                },
+
+                {
+                    data: 'day',
+                    name: 'day'
+                },
+
+                {
+                    data: 'start_time',
+                    name: 'start_time'
+                },
+
+                {
+                    data: 'end_time',
+                    name: 'end_time'
+                },
+
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ],
+            language: {
+                paginate: {
+                    previous: 'Sebelumnya',
+                    next: 'Selanjutnya'
+                }
+            },
         });
-
-        function validate() {
-            const day = $('#day');
-            const startTime = $('#startTime');
-            const endTime = $('#endTime');
-
-            if (day.val() == '') {
-                Swal.fire({
-                    icon: "error",
-                    text: "Pilih hari terlebih dahulu !",
-                    buttonsStyling: false,
-                    customClass: {
-                        confirmButton: 'btn btn-gradient-primary',
-                    },
-                });
-
-                return false;
-            }
-
-            if (startTime.val() == '') {
-                Swal.fire({
-                    icon: "error",
-                    text: "Jam mulai tidak boleh kosong !",
-                    buttonsStyling: false,
-                    customClass: {
-                        confirmButton: 'btn btn-gradient-primary',
-                    },
-                });
-
-                return false;
-            }
-
-            if (endTime.val() == '') {
-                Swal.fire({
-                    icon: "error",
-                    text: "Jam selesai tidak boleh kosong !",
-                    buttonsStyling: false,
-                    customClass: {
-                        confirmButton: 'btn btn-gradient-primary',
-                    },
-                });
-
-                return false;
-            }
-
-            return true;
-        }
     </script>
 @endsection

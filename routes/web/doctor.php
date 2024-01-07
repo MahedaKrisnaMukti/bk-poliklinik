@@ -33,6 +33,18 @@ Route::group(
         Route::get('jadwal-periksa', [CheckupScheduleController::class, 'index'])
             ->name('index');
 
+        Route::get('jadwal-periksa/datatable', [CheckupScheduleController::class, 'datatable'])
+            ->name('datatable');
+
+        Route::get('jadwal-periksa/create', [CheckupScheduleController::class, 'create'])
+        ->name('create');
+
+        Route::post('jadwal-periksa', [CheckupScheduleController::class, 'store'])
+            ->name('store');
+
+        Route::get('jadwal-periksa/{id}/edit', [CheckupScheduleController::class, 'edit'])
+        ->name('edit');
+
         Route::put('jadwal-periksa/{id}', [CheckupScheduleController::class, 'update'])
             ->name('update');
     }

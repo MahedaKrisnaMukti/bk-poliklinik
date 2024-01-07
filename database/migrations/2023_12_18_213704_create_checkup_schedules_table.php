@@ -35,6 +35,7 @@ return new class extends Migration
                 'Kamis',
                 'Jumat',
                 'Sabtu',
+                'Minggu',
             ])
                 ->comment('Hari');
 
@@ -43,6 +44,12 @@ return new class extends Migration
 
             $table->time('end_time')
                 ->comment('Jam selesai');
+
+            $table->enum('status', [
+                'Aktif',
+                'Tidak Aktif',
+            ])
+            ->comment('status');
 
             $table->timestamps();
         });
